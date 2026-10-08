@@ -21,10 +21,20 @@ para tener dónde trabajar con mi grupo.
    reserva queda registrada a mi nombre.
 2. **Dado** que elijo como inicio las 10:00 y como fin las 09:00, **Cuando** intento reservar,
    **Entonces** la reserva se rechaza con el mensaje "La hora de fin debe ser posterior a la de inicio".
+3. **Dado** que la sala A está reservada por otro usuario de 09:00 a 10:00, **Cuando** intento
+   reservarla de 00:00 a 10:00, **Entonces** la reserva no se realiza y se muestra el mensaje
+   "Error en la reserva: Sala ya reservada en ese intervalo de tiempo".
+4. **Dado** que un estudiante envía dos veces la misma solicitud de reserva para la sala A,
+   **Cuando** se procesa la solicitud, **Entonces** se registra una sola reserva a nombre del
+   estudiante.
+5. **Dado** que un estudiante ya tiene registrada una reserva para la sala A, **Cuando** intenta
+   registrar nuevamente esa misma reserva, **Entonces** no se crea una reserva duplicada y se
+   conserva la reserva existente.
 
 ### Edge Cases
 
-- ¿Qué pasa si la sala ya está ocupada en ese horario?
+- Si la sala ya está reservada por otro usuario durante el intervalo solicitado, la reserva se rechaza
+  con el mensaje "Error en la reserva: Sala ya reservada en ese intervalo de tiempo".
 
 ## Requirements
 
