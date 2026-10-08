@@ -13,6 +13,29 @@ class CrearReserva {
       );
     }
 
+    final reservas = await repositorio.reservasDeSala(solicitud.salaId);
+
+    for (final existente in reservas) {
+      final mismaReserva = existente.usuarioId == solicitud.usuarioId &&
+          existente.inicio.isAtSameMomentAs(solicitud.inicio) &&
+          existente.fin.isAtSameMomentAs(solicitud.fin);
+
+      if (mismaReserva) {
+        return ResultadoReserva.aceptada(existente);
+      }
+    }
+
+    for (final existente in reservas) {
+      final seSolapan = solicitud.inicio.isBefore(existente.fin) &&
+          existente.inicio.isBefore(solicitud.fin);
+
+      if (seSolapan) {
+        return ResultadoReserva.rechazada(
+          'Error en la reserva: Sala ya reservada en ese intervalo de tiempo',
+        );
+      }
+    }
+
     final reserva = await repositorio.guardar(solicitud);
     return ResultadoReserva.aceptada(reserva);
   }
