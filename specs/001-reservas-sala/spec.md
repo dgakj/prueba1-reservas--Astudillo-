@@ -24,6 +24,12 @@ para tener dónde trabajar con mi grupo.
 3. **Dado** que la sala A está reservada por otro usuario de 09:00 a 10:00, **Cuando** intento
    reservarla de 00:00 a 10:00, **Entonces** la reserva no se realiza y se muestra el mensaje
    "Error en la reserva: Sala ya reservada en ese intervalo de tiempo".
+4. **Dado** que un estudiante envía dos veces la misma solicitud de reserva para la sala A,
+   **Cuando** se procesa la solicitud, **Entonces** se registra una sola reserva a nombre del
+   estudiante.
+5. **Dado** que un estudiante ya tiene registrada una reserva para la sala A, **Cuando** intenta
+   registrar nuevamente esa misma reserva, **Entonces** no se crea una reserva duplicada y se
+   conserva la reserva existente.
 
 ### Edge Cases
 
